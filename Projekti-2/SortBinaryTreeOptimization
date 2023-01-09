@@ -1,0 +1,91 @@
+//Emri i klases
+public class SortBinaryTreeOptimization
+{
+
+    // Klasa që përmban majtas dhe
+    // fëmijën e djathtë.
+    // nyja dhe vlera kryesore.
+    class Node
+    {
+        int key;
+        Node left, right;
+
+        public Node(int item)
+        {
+            key = item;
+            left = right = null;
+        }
+    }
+
+    // Rrenja e BST
+    Node root;
+
+    // Konstruktori
+    SortBinaryTreeOptimization()
+    {
+        root = null;
+    }
+
+    // Kjo metodë kryesisht
+    // thërret insertRec()
+    void insert(int key)
+    {
+        root = insertRec(root, key);
+    }
+
+    /* Një funksion rekurziv që
+     vendos një çelës të ri në BST */
+    Node insertRec(Node root, int key)
+    {
+
+		/* Nese  tree eshte e zbrazet,
+		kthe nje  node  te re*/
+        if (root == null)
+        {
+            root = new Node(key);
+            return root;
+        }
+
+		/* Perndryshe, perserite tree (pemen) poshte */
+        if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+
+        /* kthe rrenjen */
+        return root;
+    }
+
+    // Një funksion për të bërë
+    //   kalimin e rendit ne BST
+    void inorderRec(Node root)
+    {
+        if (root != null)
+        {
+            inorderRec(root.left);
+            System.out.print(root.key + " ");
+            inorderRec(root.right);
+        }
+    }
+    void treeins(int arr[])
+    {
+        for(int i = 0; i < arr.length; i=i+1)
+
+
+
+        {
+            insert(arr[i]);
+        }
+
+    }
+
+// Metoda main (kryesore)
+
+    public static void main(String[] args)
+    {
+        SortBinaryTreeOptimization tree = new SortBinaryTreeOptimization();
+        int arr[] = {50, 30, 70, 15, 7, 62, 22, 35, 87, 22, 31};
+        tree.treeins(arr);
+        tree.inorderRec(tree.root);
+    }
+}
