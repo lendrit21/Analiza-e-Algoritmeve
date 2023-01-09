@@ -1,0 +1,83 @@
+//Emri i klases
+public class BinaryTreeOptimization {
+
+    /* Klasa që përmban të majtën
+     dhe fëmijen e djathtë te nyjës aktuale
+     * dhe vleren kryesore*/
+    class Node {
+        int key;
+        Node left, right;
+
+      //Klasa node (nyje)
+        public Node(int item)
+        {
+            key = item;
+            left = right = null;
+        }
+    }
+
+    // Rrenja e BST
+    Node root;
+
+    // konstruktori
+    BinaryTreeOptimization() { root = null; }
+
+    BinaryTreeOptimization(int value) { root = new Node(value); }
+
+    // Kjo metodë thërret kryesisht insertRec()
+    void insert(int key) { root = insertRec(root, key); }
+
+    /* Një funksion rekurziv që
+     vendos një çelës të ri në BST */
+    Node insertRec(Node root, int key)
+    {
+
+		/* Nëse pema është bosh,
+            ktheni një nyje të re */
+        if (root == null) {
+            root = new Node(key);
+            return root;
+        }
+
+        /* Përndryshe, përsëritni pemen poshtë */
+        else if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+
+        /* ktheni treguesin (pointerin) e nyjes (të pandryshuar) */
+        return root;
+    }
+
+    // Kjo metodë thërret kryesisht InorderRec()
+    void inorder() { inorderRec(root); }
+
+    // Një funksion i dobishëm për të
+    //  bere kalimin e rregullt në BST
+    void inorderRec(Node root)
+    {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.println(root.key);
+            inorderRec(root.right);
+        }
+    }
+
+    // Metoda mainv(kryesore)
+    public static void main(String[] args)
+    {
+        //e therret klasen
+        BinaryTreeOptimization tree = new BinaryTreeOptimization();
+        //vendosja e vlerave te pemes
+        tree.insert(10);
+        tree.insert(15);
+        tree.insert(20);
+        tree.insert(30);
+        tree.insert(40);
+        tree.insert(50);
+        tree.insert(60);
+
+        // printon inorder traversal e BST
+        tree.inorder();
+    }
+}
