@@ -1,1 +1,1 @@
-# Analiza-e-Algoritmeve
+# Projektet ne Analizen e Algoritmeve.
